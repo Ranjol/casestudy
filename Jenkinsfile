@@ -9,6 +9,12 @@ pipeline {
             }
         }
 
+        stage('Selenium Test') {
+            steps {
+                bat 'python -m pytest test_securecheck.py -v'
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 bat 'docker build -t ranjol/securecheck:latest .'
@@ -33,11 +39,11 @@ pipeline {
             }
         }
 
-       stage('Deploy to Kubernetes') {
-    steps {
-        bat 'kubectl --kubeconfig="C:\\Windows\\System32\\config\\systemprofile\\.kube\\config" set image deployment/securecheck securecheck=ranjol/securecheck:latest'
-        bat 'kubectl --kubeconfig="C:\\Windows\\System32\\config\\systemprofile\\.kube\\config" rollout status deployment/securecheck'
-    }
-}
+        stage('Deploy to Kubernetes') {
+            steps {
+                bat 'kubectl --kubeconfig="C:\\Windows\\System32\\config\\systemprofile\\.kube\\config" set image deployment/securecheck securecheck=ranjol/securecheck:latest'
+                bat 'kubectl --kubeconfig="C:\\Windows\\System32\\config\\systemprofile\\.kube\\config" rollout status deployment/securecheck'
+            }
+        }
     }
 }
