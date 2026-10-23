@@ -33,11 +33,11 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
-            steps {
-                bat 'kubectl set image deployment/securecheck securecheck=ranjol/securecheck:latest'
-                bat 'kubectl rollout status deployment/securecheck'
-            }
-        }
+       stage('Deploy to Kubernetes') {
+    steps {
+        bat 'kubectl --kubeconfig="C:\\Windows\\System32\\config\\systemprofile\\.kube\\config" set image deployment/securecheck securecheck=ranjol/securecheck:latest'
+        bat 'kubectl --kubeconfig="C:\\Windows\\System32\\config\\systemprofile\\.kube\\config" rollout status deployment/securecheck'
+    }
+}
     }
 }
