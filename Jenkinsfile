@@ -11,7 +11,7 @@ pipeline {
 
         stage('Selenium Test') {
             steps {
-                bat 'python -m pytest test_securecheck.py -v'
+               bat '"C:\\Users\\shiva\\AppData\\Local\\Programs\\Python\\Python313\\python.exe" -m pytest test_securecheck.py -v'
             }
         }
 
