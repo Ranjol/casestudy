@@ -1,0 +1,281 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Analyze password strength and improve password security.">
+    <title>SecureCheck | Password Security Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="brand">
+            <div class="brand-icon">S</div>
+            <div>
+                <h2>SecureCheck</h2>
+                <p>Password Security Analyzer</p>
+            </div>
+        </div>
+        <span class="security-label">🔒 Privacy First</span>
+    </header>
+
+    <main class="main-container">
+
+        <section class="intro">
+            <span class="eyebrow">PASSWORD SECURITY TOOL</span>
+            <h1>Build a stronger password.</h1>
+            <p>
+                Evaluate your password strength and discover how to make it
+                more secure with real-time analysis.
+            </p>
+        </section>
+
+        <section class="workspace">
+
+            <!-- LEFT SIDE: PASSWORD ANALYZER -->
+            <section class="checker-card">
+
+                <div class="card-heading">
+                    <div>
+                        <h2>Password Analyzer</h2>
+                        <p>Enter a password to begin the security assessment.</p>
+                    </div>
+                    <div class="shield-icon">🛡️</div>
+                </div>
+
+                <form id="passwordForm" autocomplete="off">
+                    <label for="password">Your Password</label>
+
+                    <div class="password-input-wrapper">
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="new-password"
+                            spellcheck="false"
+                            aria-describedby="passwordHelp"
+                        >
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            class="toggle-button"
+                            aria-label="Show password"
+                            aria-pressed="false"
+                        >
+                            Show
+                        </button>
+                    </div>
+
+                    <p id="passwordHelp" class="input-help">
+                        Your password is analyzed locally in your browser.
+                    </p>
+
+                    <div class="strength-header">
+                        <span>Strength Level</span>
+                        <span id="strengthLabel" class="strength-label">
+                            Not evaluated
+                        </span>
+                    </div>
+
+                    <div
+                        class="strength-meter"
+                        role="progressbar"
+                        aria-label="Password strength"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                        id="strengthProgress"
+                    >
+                        <div id="strengthBar" class="strength-bar"></div>
+                    </div>
+
+                    <p id="strengthDescription" class="strength-description">
+                        Enter a password to see your security assessment.
+                    </p>
+
+                    <div class="requirements-section">
+                        <h3>Password Requirements</h3>
+                        <p class="section-description">
+                            Follow these guidelines to improve your password.
+                        </p>
+
+                        <ul class="requirements-list">
+                            <li id="lengthRequirement" class="requirement">
+                                <span class="requirement-icon">○</span>
+                                At least 8 characters
+                            </li>
+
+                            <li id="uppercaseRequirement" class="requirement">
+                                <span class="requirement-icon">○</span>
+                                An uppercase letter (A–Z)
+                            </li>
+
+                            <li id="lowercaseRequirement" class="requirement">
+                                <span class="requirement-icon">○</span>
+                                A lowercase letter (a–z)
+                            </li>
+
+                            <li id="numberRequirement" class="requirement">
+                                <span class="requirement-icon">○</span>
+                                A number (0–9)
+                            </li>
+
+                            <li id="specialRequirement" class="requirement">
+                                <span class="requirement-icon">○</span>
+                                A special character (!, @, #, etc.)
+                            </li>
+
+                            <li id="longLengthRequirement" class="requirement">
+                                <span class="requirement-icon">○</span>
+                                12 or more characters recommended
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="suggestions-section" aria-live="polite">
+                        <h3>Security Recommendations</h3>
+                        <ul id="suggestionsList">
+                            <li>Enter a password to receive recommendations.</li>
+                        </ul>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button
+                            type="button"
+                            id="clearButton"
+                            class="clear-button"
+                        >
+                            Clear Password
+                        </button>
+                    </div>
+                </form>
+
+                <div class="privacy-note">
+                    <span>🔐</span>
+                    <p>
+                        <strong>Your privacy matters.</strong>
+                        This tool analyzes passwords in your browser.
+                        Avoid entering passwords used for important accounts.
+                    </p>
+                </div>
+
+            </section>
+
+            <!-- RIGHT SIDE: PASSWORD GENERATOR -->
+            <aside class="generator-panel">
+
+                <div class="generator-heading">
+                    <div class="generator-icon">✨</div>
+                    <div>
+                        <h2>Password Generator</h2>
+                        <p>Create a strong, random password.</p>
+                    </div>
+                </div>
+
+                <div class="generator-length">
+                    <label for="passwordLength">
+                        Password Length
+                        <span id="lengthValue">16</span>
+                    </label>
+
+                    <input
+                        type="range"
+                        id="passwordLength"
+                        min="8"
+                        max="32"
+                        value="16"
+                    >
+
+                    <div class="range-labels">
+                        <span>8 characters</span>
+                        <span>32 characters</span>
+                    </div>
+                </div>
+
+                <div class="generator-options">
+                    <label>
+                        <input type="checkbox" id="includeNumbers" checked>
+                        <span>Include numbers</span>
+                    </label>
+
+                    <label>
+                        <input type="checkbox" id="includeSymbols" checked>
+                        <span>Include symbols</span>
+                    </label>
+                </div>
+
+                <div class="generator-tip">
+                    <span>🛡️</span>
+                    <p>
+                        Use longer passwords with a mix of character types
+                        for better protection.
+                    </p>
+                </div>
+
+                <button type="button" id="generateButton">
+                    ✨ Generate Password
+                </button>
+
+                <button type="button" id="copyGeneratedButton">
+                    📋 Copy Password
+                </button>
+
+                <p id="generatorMessage" aria-live="polite"></p>
+
+                <div class="generator-footer">
+                    <span>🔒</span>
+                    Generated locally in your browser
+                </div>
+
+            </aside>
+
+        </section>
+
+        <!-- SECURITY INFORMATION -->
+        <section class="info-grid">
+
+            <article class="info-card">
+                <div class="info-icon">📏</div>
+                <h3>Length Matters</h3>
+                <p>
+                    Longer passwords generally provide more protection
+                    against guessing.
+                </p>
+            </article>
+
+            <article class="info-card">
+                <div class="info-icon">🔤</div>
+                <h3>Use Variety</h3>
+                <p>
+                    Combine different character types to improve
+                    password complexity.
+                </p>
+            </article>
+
+            <article class="info-card">
+                <div class="info-icon">🧩</div>
+                <h3>Avoid Patterns</h3>
+                <p>
+                    Avoid common words, predictable sequences,
+                    and reused passwords.
+                </p>
+            </article>
+
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <p>SecureCheck | DevOps Lab Case Study</p>
+        <p>Educational password-strength assessment tool</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+```
